@@ -17,8 +17,6 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    define: {
-      'process.env': env
-    }
+    // Remove the define: process.env as it can cause issues with Vite's environment variable handling
   }
 })

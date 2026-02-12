@@ -17,6 +17,9 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [activePage, setActivePage] = useState('home'); // home, privacy, terms
 
+  // API Base URL - HARDCODED FOR FINAL FIX
+  const API_BASE_URL = 'https://binary-fate-backend.onrender.com';
+
   // Load user data from localStorage and sync with backend
   useEffect(() => {
     const savedUser = localStorage.getItem('binaryFateUser');
@@ -45,7 +48,7 @@ function App() {
   const syncUsageCount = async (email, currentUser = null) => {
     try {
       console.log('Syncing usage count for email:', email);
-      const response = await axios.get(`/api/user/usage/${email}`);
+      const response = await axios.get(`${API_BASE_URL}/api/user/usage/${email}`);
       console.log('Sync response:', response.data);
       
       // Update user if we have a user object
@@ -78,7 +81,7 @@ function App() {
     e.preventDefault();
     try {
       console.log('Registering with email:', email);
-      const response = await axios.post('/api/user/register', { email });
+      const response = await axios.post(`${API_BASE_URL}/api/user/register`, { email });
       console.log('Register response:', response.data);
       setUser(response.data.user);
       localStorage.setItem('binaryFateUser', JSON.stringify(response.data.user));
@@ -111,11 +114,11 @@ function App() {
       console.log('Sending usage request with email:', usageEmail, 'Current usage:', user.usageCount);
       
       // Get the actual updated usage count from backend
-      const usageResponse = await axios.post('/api/user/usage', { email: usageEmail });
+      const usageResponse = await axios.post(`${API_BASE_URL}/api/user/usage`, { email: usageEmail });
       console.log('Usage response:', usageResponse.data);
       
       // Get Bazi analysis
-      const baziResponse = await axios.post('/api/bazi/analyze', formData);
+      const baziResponse = await axios.post(`${API_BASE_URL}/api/bazi/analyze`, formData);
       setResult(baziResponse.data);
       
       // Update user data with actual usage count from backend
@@ -146,7 +149,7 @@ function App() {
         console.log('Upgrading user to premium:', user.email);
         
         // Call manual upgrade API
-        const response = await axios.post('/api/shopify/upgrade', { email: user.email });
+        const response = await axios.post(`${API_BASE_URL}/api/shopify/upgrade`, { email: user.email });
         console.log('Upgrade response:', response.data);
         
         // Update user state with new premium status
