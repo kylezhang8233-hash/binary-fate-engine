@@ -1,0 +1,33 @@
+# Render Configuration File for Binary Fate Engine
+
+# Backend Service
+services:
+  - type: web
+    name: binary-fate-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    rootDir: backend
+    region: oregon
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: PORT
+        value: 5001
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+# Database (optional - use MongoDB Atlas instead)
+# databases:
+#   - name: binary-fate-db
+#     plan: free
+#     databaseName: binaryfate
+#     user: binaryfate_user
+#     region: oregon
