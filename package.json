@@ -1,0 +1,22 @@
+{
+  "name": "binary-fate",
+  "version": "1.0.0",
+  "description": "Binary Fate Engine - Four Pillars Decision Tool",
+  "main": "index.js",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start:backend": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "start:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "npm run start:backend & npm run start:frontend",
+    "dev": "npm run dev:backend & npm run start:frontend"
+  },
+  "keywords": ["bazi", "four pillars", "binary fate", "metaphysics"],
+  "author": "Binary Fate Engine",
+  "license": "MIT",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
