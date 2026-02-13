@@ -1,28 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const baziRoutes = require('./routes/bazi');
-const userRoutes = require('./routes/user');
-const shopifyModule = require('./routes/shopify');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// MongoDB Atlas Connection
-const connectDB = async () => {
-  try {
-    const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/binaryfate';
-    await mongoose.connect(mongoURI);
-    console.log('✅ MongoDB Atlas connected successfully');
-  } catch (error) {
-    console.error('❌ MongoDB connection failed:', error.message);
-    process.exit(1);
-  }
-};
-
-// Connect to MongoDB
-connectDB();
+console.log('✅ Binary Fate Engine API initialized without MongoDB (user features removed)');
 
 // Middleware
 const corsOptions = {
@@ -40,8 +24,6 @@ app.use(express.json());
 
 // Routes
 app.use('/api/bazi', baziRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/shopify', shopifyModule.router);
 
 // Root endpoint
 app.get('/', (req, res) => {
