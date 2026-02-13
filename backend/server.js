@@ -9,12 +9,9 @@ const PORT = process.env.PORT || 5001;
 console.log('✅ Binary Fate Engine API initialized without MongoDB (user features removed)');
 
 // Middleware
+// Allow all origins since this is a public API
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    process.env.FRONTEND_URL // Add production frontend URL here
-  ],
+  origin: '*',
   credentials: true,
   optionsSuccessStatus: 200
 };
